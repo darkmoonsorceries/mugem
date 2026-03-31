@@ -37,7 +37,7 @@ pub const AgentWindow = struct {
             c.NSWindowStyleMaskResizable,
             c.NSBackingStoreBuffered,
             false,
-        ) autorelease];
+        );
         
         const title = try std.fmt.allocPrintZ(std.heap.page_allocator, 
             "kimi-{d:02d} [AGENT-{d:02d}] — {s}", .{id, id, worktree});
