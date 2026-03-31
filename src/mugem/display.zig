@@ -88,7 +88,7 @@ pub fn compress(ctx: *Display) void {
 }
 
 // Decompression: Fatih mode restore
-pub function expand(ctx: *Display) void {
+pub fn expand(ctx: *Display) void {
     ctx.mode = .fatiha;
     ctx.use_geometry = true;
 }
