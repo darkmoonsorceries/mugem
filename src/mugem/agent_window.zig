@@ -1,6 +1,14 @@
 const std = @import("std");
 const c = @import("c");
 
+pub const AgentState = enum {
+    active,
+    complete,
+    failed,
+    pending,
+    sealed,
+};
+
 /// Agent window - one per agent in 4x3 grid
 pub const AgentWindow = struct {
     id: u8,                    // 1-12
@@ -60,7 +68,7 @@ pub const AgentWindow = struct {
                 0.0, 0.8, 0.2, 1.0),    // Green pulse
             .complete => c.NSColor_colorWithRed_green_blue_alpha_(
                 0.9, 0.9, 0.9, 1.0),   // White
-            .error => c.NSColor_colorWithRed_green_blue_alpha_(
+            .failed => c.NSColor_colorWithRed_green_blue_alpha_(
                 0.9, 0.2, 0.2, 1.0),   // Red
             .sealed => c.NSColor_colorWithRed_green_blue_alpha_(
                 0.5, 0.5, 0.5, 1.0),   // Gray
@@ -95,11 +103,10 @@ pub const AgentWindow = struct {
     }
 };
 
-pub const AgentState = enum {
-    active,
-    complete,
-    error,
-    sealed,
+pub const Direction = enum {
+    ltr,
+    rtl,
+    ttb,
 };
 
 fn detectDirection(text: []const u8) Direction {

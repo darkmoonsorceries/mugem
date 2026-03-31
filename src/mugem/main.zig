@@ -149,7 +149,7 @@ pub fn updateAgentState(agent_id: u8, state: AgentState) void {
         const status_text = switch (state) {
             .active => "⚡ ACTIVE",
             .complete => "✓ COMPLETE",
-            .error => "✗ ERROR",
+            .failed => "✗ FAILED",
             .sealed => "◉ SEALED",
         };
         agent.write(status_text);
