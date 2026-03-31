@@ -10,6 +10,14 @@ pub const TawhidMode = enum {
     mugetsu,  // 4 - Moonless: raw data
 };
 
+pub const AgentState = enum {
+    active,
+    complete,
+    failed,
+    pending,
+    sealed,
+};
+
 /// Display protocol state
 pub const DisplayProtocol = struct {
     mode: TawhidMode,
@@ -80,7 +88,7 @@ pub const DisplayProtocol = struct {
             const status = switch (state) {
                 .active => "●",
                 .complete => "✓",
-                .error => "✗",
+                .failed => "✗",
                 .pending => "○",
                 .sealed => "◉",
             };
@@ -97,7 +105,7 @@ pub const DisplayProtocol = struct {
             const char = switch (state) {
                 .complete => "✓",
                 .active => "⚡",
-                .error => "✗",
+                .failed => "✗",
                 .pending => "·",
                 .sealed => "◉",
             };
@@ -115,7 +123,7 @@ pub const DisplayProtocol = struct {
             const c = switch (state) {
                 .complete => "+",
                 .active => "*",
-                .error => "!",
+                .failed => "!",
                 .pending => ".",
                 .sealed => "#",
             };
@@ -154,14 +162,6 @@ pub const DisplayProtocol = struct {
             self.active_count += 1;
         }
     }
-};
-
-pub const AgentState = enum {
-    active,
-    complete,
-    error,
-    pending,
-    sealed,
 };
 
 /// The 7 checkpoints
